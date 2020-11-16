@@ -35,7 +35,6 @@ export default function SignUp() {
         }),
         onSubmit: values => {
             dispatch(createUser(values));
-            history.push('/mainPage');
         },
     });
 

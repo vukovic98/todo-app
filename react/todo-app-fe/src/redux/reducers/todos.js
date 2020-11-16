@@ -38,7 +38,43 @@ export default function UserTodosReducer(state = initialState, action) {
                 loading: false,
                 error: null,
             }
-            case type.CREATE_TODO_FAILED:
+        case type.CREATE_TODO_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case type.DELETE_TODO_REQUESTED:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        case type.DELETE_TODO_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+            }
+        case type.DELETE_TODO_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case type.EDIT_TODO_REQUESTED:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            }
+        case type.EDIT_TODO_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+            }
+        case type.EDIT_TODO_FAILED:
             return {
                 ...state,
                 loading: false,

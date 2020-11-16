@@ -5,7 +5,7 @@ from .models import ToDo
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password', 'username')
+        fields = ('id', 'first_name', 'last_name', 'email', 'password', 'username')
 
     def create(self, validated_data):
         user = User(
@@ -20,5 +20,5 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ToDoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = ToDo
-        fields = ('title', 'description', 'priority', 'completed', 'user')
+        model = ToDo 
+        fields = ('id', 'title', 'description', 'priority', 'completed', 'user')

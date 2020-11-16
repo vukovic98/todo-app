@@ -4,7 +4,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
-import {loginUser, userData} from '../redux/actions/users'
+import {loginUser} from '../redux/actions/users'
 
 export default function Login() {
 
@@ -24,8 +24,6 @@ export default function Login() {
         }),
         onSubmit: values => {
             dispatch(loginUser(values));
-            //dispatch(userData());
-            //history.push('/mainPage');
         },
     });
 

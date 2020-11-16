@@ -11,7 +11,10 @@ function getData() {
 function* userTodos(action) {
     try {
        const todos = yield call(getData);
-       yield put(userTodosSuccess(todos));
+
+       if(todos !== undefined) {
+         yield put(userTodosSuccess(todos));
+       }
     } catch (e) {
        yield put(userTodosFail(e));
     }

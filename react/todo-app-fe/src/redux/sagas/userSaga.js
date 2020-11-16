@@ -7,20 +7,29 @@ function registerUser(values) {
                .post(`register/`, 
                   JSON.stringify(values),
                )
-               .then((response) => response.data);
+               .then((response) => response.data)
+               .catch((mess) => {
+                  console.log(mess);
+                  alert("User with given username already exists!")
+               })
 }
 
 function* createUser(action) {
     try {
        const user = yield call(registerUser, action.payload);
-       yield put(createUserSuccess(user));
-
-       const name = user.username;
-       const pass = action.payload.password;
-
-       const logData = '{"username":"' + name + '", "password":"' + pass + '"}';
        
-       yield put(loginUser(JSON.parse(logData)));
+       if(user !== undefined) {
+         yield put(createUserSuccess(user));
+
+         const name = user.username;
+         const pass = action.payload.password;
+
+         const logData = '{"username":"' + name + '", "password":"' + pass + '"}';
+         
+         yield put(loginUser(JSON.parse(logData)));
+
+         window.location.href('mainPage');
+       }
     } catch (e) {
        yield put(createUserFail(e));
     }

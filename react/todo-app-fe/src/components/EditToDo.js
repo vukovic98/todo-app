@@ -3,12 +3,11 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
-import { createTodo } from '../redux/actions/todos';
+import { createTodo, editTodo } from '../redux/actions/todos';
 
-export default function AddToDo() {
+export default function EditToDo({todo}) {
     const [show, setShow] = useState(false);
     const user = useSelector(state => state.user.user);
-
     
     const dispatch = useDispatch();
   
@@ -19,10 +18,11 @@ export default function AddToDo() {
 
     const formik = useFormik({
         initialValues: {
-            title: '',
-            description: '',
-            priority: '',
-            completed: false,
+            id: todo.id,
+            title: todo.title,
+            description: todo.description,
+            priority: todo.priority,
+            completed: todo.completed,
             user: ''
         },
         validationSchema: Yup.object({
@@ -42,7 +42,8 @@ export default function AddToDo() {
             const userLink = "http://127.0.0.1:8000/users/" + user.id + "/";
             values.user = userLink;
 
-            dispatch(createTodo(values));
+
+            dispatch(editTodo(values));
 
             handleClose();
         },
@@ -51,12 +52,12 @@ export default function AddToDo() {
     return (
       <>
         <Button variant="primary" size='sm' onClick={handleShow} style={{'backgroundColor':'rgb(86,140,199)', 'borderColor':'rgb(86,140,199)'}}>
-          Add item
+          Edit
         </Button>
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add new ToDo item</Modal.Title>
+            <Modal.Title>Edit ToDo item</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form>
@@ -94,9 +95,9 @@ export default function AddToDo() {
                     {...formik.getFieldProps('priority')}
                 >
                     <option defaultValue>Choose</option>
-                    <option>Low</option>
-                    <option>Medium</option>
-                    <option>High</option>
+                    <option value='1'>Low</option>
+                    <option value='2'>Medium</option>
+                    <option value='3'>High</option>
                 </Form.Control>
                 {formik.touched.priority && formik.errors.priority ? (
                                     <div style={{'color':'red'}}>*{formik.errors.priority}</div>

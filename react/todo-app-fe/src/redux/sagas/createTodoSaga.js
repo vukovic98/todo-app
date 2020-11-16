@@ -1,5 +1,5 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import { createTodoSuccess, createTodoFail } from '../actions/todos';
+import { createTodoSuccess, createTodoFail, getUserTodos } from '../actions/todos';
 import axiosInstance from '../../axios';
 
 function sendTodo(todo) {
@@ -12,6 +12,8 @@ function* createTodo(action) {
     try {
        const todo = yield call(sendTodo, action.payload);
        yield put(createTodoSuccess(todo));
+
+       yield put(getUserTodos());
     } catch (e) {
        yield put(createTodoFail(e));
     }

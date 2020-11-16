@@ -20,9 +20,12 @@ function loginUser(valData) {
 function* logUser(action) {
     try {
        const keys = yield call(loginUser, action.payload);
-       yield put(loginUserSuccess(keys));
+       
+       if(keys !== undefined) {
+         yield put(loginUserSuccess(keys));
 
-       yield put(userData());
+         yield put(userData());
+       }
     } catch (e) {
        yield put(loginUserFail(e));
     }

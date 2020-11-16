@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
 export default function UserComponent() {
 
     const user = useSelector(state => state.user.user);
+    const history = useHistory();
+
+    const logout = () => {
+        localStorage.removeItem('access_token');
+        history.push('');
+    };
     
     return (
         <div>
@@ -16,7 +24,15 @@ export default function UserComponent() {
                 :
                 <div>
             <p>{user.first_name} {user.last_name}</p>
-            <p className="text-muted"><i>{user.username}</i></p></div>
+            <p className="text-muted"><i>{user.username}</i></p>
+            <Button 
+                block 
+                size='sm'
+                variant='secondary'  
+                onClick={() => logout()}  
+            >Log Out</Button>
+            </div>
+            
             }
         </div>
     );

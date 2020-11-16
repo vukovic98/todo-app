@@ -5,13 +5,21 @@ import axiosInstance from '../../axios';
 function getData() {
    return axiosInstance
 			.get(`user/me`)
-			.then((res) => res.data);
+         .then((res) => res.data)
+         .catch((mess) => {
+            console.log(mess);
+            alert('Your session has expired! Please login again!');
+            window.location.href = '/';
+         })
 }
 
 function* userData(action) {
     try {
        const user = yield call(getData);
-       yield put(userDataSuccess(user));
+
+       if(user !== undefined) {
+         yield put(userDataSuccess(user));
+       }
     } catch (e) {
        yield put(userDataFail(e));
     }

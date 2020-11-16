@@ -21,7 +21,7 @@ export default function AddToDo() {
         initialValues: {
             title: '',
             description: '',
-            priority: '',
+            priority: 'Low',
             completed: false,
             user: ''
         },
@@ -91,9 +91,10 @@ export default function AddToDo() {
                     as="select"
                     required
                     id="priority"
+                    placeholder="Choose"
                     {...formik.getFieldProps('priority')}
                 >
-                    <option defaultValue>Choose</option>
+                    <option disabled>Choose</option>
                     <option>Low</option>
                     <option>Medium</option>
                     <option>High</option>

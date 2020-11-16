@@ -94,7 +94,7 @@ export default function EditToDo({todo}) {
                     id="priority"
                     {...formik.getFieldProps('priority')}
                 >
-                    <option defaultValue>Choose</option>
+                    <option defaultValue disabled>Choose</option>
                     <option value='1'>Low</option>
                     <option value='2'>Medium</option>
                     <option value='3'>High</option>

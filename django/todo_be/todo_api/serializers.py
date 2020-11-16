@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'email', 'password', 'username')
 
     def create(self, validated_data):
-        user = User(**validated_data)
+        user = User(
             email=validated_data['email'],
             username=validated_data['username'],
             first_name=validated_data['first_name'],

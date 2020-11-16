@@ -1,6 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import { loginUserSuccess, loginUserFail, userData } from '../actions/users';
 import axiosInstance from '../../axios';
+import swal from 'sweetalert';
 
 function loginUser(valData) {
     console.log("DATA:", JSON.stringify(valData));
@@ -13,7 +14,14 @@ function loginUser(valData) {
          })
          .catch((mess) => {
             console.log(mess);
-            alert("No User With Given Credentials!");
+            swal({
+               title: "Error",
+               text: "There is no user with given credentials!",
+               icon: "warning",
+               button: "Ok",
+             }).then(() => {
+               window.location.href = '/login';
+             })
          })
 }
 

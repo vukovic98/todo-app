@@ -1,6 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import { createUserFail, createUserSuccess, loginUser } from '../actions/users';
 import axiosInstance from '../../axios';
+import swal from 'sweetalert';
 
 function registerUser(values) {
     return axiosInstance
@@ -10,7 +11,12 @@ function registerUser(values) {
                .then((response) => response.data)
                .catch((mess) => {
                   console.log(mess);
-                  alert("User with given username already exists!")
+                  swal({
+                     title: "Error",
+                     text: "User with given username already exists!",
+                     icon: "warning",
+                     button: "Ok",
+                   });
                })
 }
 

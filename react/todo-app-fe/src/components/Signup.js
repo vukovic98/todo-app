@@ -42,7 +42,7 @@ export default function SignUp() {
         <div className="Signup" >
                 <Form 
                     as={Col} 
-                    className="col-md-4 mr-auto ml-auto mt-5 shadow-lg pl-5 pr-5 rounded pt-5 pb-4" 
+                    className="col-md-4 mr-auto ml-auto mt-4 shadow-lg pl-5 pr-5 rounded pt-5 pb-4" 
                     style={{'backgroundColor':'rgb(245,247,248)'}}
                 >
                         <h3 className="text-left mb-4">Create Your Account</h3>

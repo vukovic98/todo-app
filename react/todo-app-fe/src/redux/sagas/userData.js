@@ -1,6 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import { userDataSuccess, userDataFail } from '../actions/users';
 import axiosInstance from '../../axios';
+import swal from 'sweetalert';
 
 function getData() {
    return axiosInstance
@@ -8,8 +9,15 @@ function getData() {
          .then((res) => res.data)
          .catch((mess) => {
             console.log(mess);
-            alert('Your session has expired! Please login again!');
-            window.location.href = '/';
+            swal({
+               title: "Error",
+               text: "Your session has expired, please log in again!",
+               icon: "warning",
+               button: "Ok",
+             }).then(() => {
+               window.location.href = '/';
+             })
+           
          })
 }
 

@@ -1,11 +1,23 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import { userTodosSuccess, userTodosFail } from '../actions/todos';
 import axiosInstance from '../../axios';
+import swal from 'sweetalert';
 
 function getData() {
    return axiosInstance
 			.get(`todos/`)
-			.then((res) => res.data);
+         .then((res) => res.data)
+         .catch((mess) => {
+            console.log(mess);
+            swal({
+               title: "Error",
+               text: "Your session has expired, please log in again!",
+               icon: "warning",
+               button: "Ok",
+             }).then(() => {
+               window.location.href = '/';
+             })
+         })
 }
 
 function* userTodos(action) {

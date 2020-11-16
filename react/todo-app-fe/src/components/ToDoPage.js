@@ -30,7 +30,7 @@ export default function ToDoPage() {
                 </div>
                 <div className="col-md-9 float-left">
                     {todos.length ===0 ? (<div className="pt-3">No Items Created</div>) : (todos.map((todo) => {
-                        return <ToDoItem key={todo.title} todo={todo} />
+                        return <ToDoItem key={todo.id} todo={todo} />
                     }))}
                 </div>
                 

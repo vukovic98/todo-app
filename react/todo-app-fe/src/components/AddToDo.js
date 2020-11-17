@@ -14,6 +14,12 @@ export default function AddToDo() {
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    
+    const PRIORITY_TO_NUM = {
+      'Low': 1,
+      'Medium': 2,
+      'High': 3
+    }
 
     
 
@@ -34,12 +40,9 @@ export default function AddToDo() {
             .required('Required'),
         }),
         onSubmit: values => {
-            if(values.priority === 'Low') values.priority = 1;
-            if(values.priority === 'Medium') values.priority = 2;
-            if(values.priority === 'High') values.priority = 3;
-            console.log(values);
+            values.priority = PRIORITY_TO_NUM[values.priority];
 
-            const userLink = "http://127.0.0.1:8000/users/" + user.id + "/";
+            const userLink = process.env.REACT_APP_BASE_API_URL + "users/" + user.id + "/";
             values.user = userLink;
 
             dispatch(createTodo(values));

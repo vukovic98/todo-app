@@ -34,7 +34,7 @@ class CustomUserRegister(APIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoggedUserData(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     
 
     def get(self, request):
@@ -44,7 +44,7 @@ class LoggedUserData(APIView):
 
 class UserToDoItems(viewsets.ModelViewSet):
     queryset = ToDo.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = ToDoSerializer
 
     def get_queryset(self):
